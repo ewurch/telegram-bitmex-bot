@@ -50,13 +50,13 @@ class MyStreamListener(tweepy.StreamListener):
 
         if "Okcoin" in message or "RT @" in message:
             pass
-        elif volume_catcher(message) < 40000:
-            pass
-        elif volume_catcher(message) == 0:
-            bot.send_message(chat_id=chat_id, parse_mode='HTML', text=message)
+        elif volume_catcher(message) >= 40000 or volume_catcher(message) == 0:
+            if not "XBT" in message or "XBTUSD" in message:
+                bot.send_message(chat_id=chat_id, parse_mode='HTML', text=message)
+            else:
+                pass
         else:
-            bot.send_message(chat_id=chat_id, parse_mode='HTML', text=message)
-
+            pass
 
     def on_error(self, status_code):
         if status_code == 420:
