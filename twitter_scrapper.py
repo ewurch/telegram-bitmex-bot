@@ -52,7 +52,10 @@ class MyStreamListener(tweepy.StreamListener):
             pass
         elif volume_catcher(message) >= 40000 or volume_catcher(message) == 0:
             if not "XBT" in message or "XBTUSD" in message:
-                bot.send_message(chat_id=chat_id, parse_mode='HTML', text=message)
+                if message.startswith("Liquidated"):
+                    bot.send_message(chat_id=chat_id, parse_mode='HTML', text=message)
+                else:
+                    pass
             else:
                 pass
         else:
